@@ -1,3 +1,7 @@
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
+
 const express = require('express')
 const morgan = require('morgan')
 
@@ -86,12 +90,20 @@ routes.get('/productos/sample', async function (req, res) {
 
 app.use('/api', routes);
 
-app.listen(3000, () => {
-    console.log('listening on port 3000');
-    sequelize.authenticate()
-        .then(
-            console.log('conectado a la base de datos')
-        )
-        .catch(err => console.log('error: ' + err.message));
 
-})
+sequelize.authenticate()
+    .then(
+        console.log('conectado a la base de datos')
+    )
+    .catch(err => console.log('error: ' + err.message));
+
+
+// app.listen(3000, () => {
+//     console.log('listening on port 3000');
+// })
+
+https.createServer({
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem'),
+    passphrase: 'clave'
+}, app).listen(3000);
