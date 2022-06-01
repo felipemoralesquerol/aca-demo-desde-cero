@@ -1,5 +1,5 @@
 # Directivas de intalación
-```npm i express morgan dotenv```
+```npm i express helmet morgan dotenv```
 
 
 # Agregado de base de datos MySQL vía sequelize en base a:
